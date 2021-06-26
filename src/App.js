@@ -1,4 +1,5 @@
 import React from "react";
+import ThemeSlider from "./components/ThemeSlider";
 
 // Components
 import Home from './pages/Home';
@@ -15,6 +16,7 @@ function App() {
   return (
     <div>
       <GlobalStyles />
+      <ThemeSlider />
       <Nav />
       <Route path={["game/:id", "/"]}>
         <Home />

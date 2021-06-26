@@ -59,42 +59,45 @@ const GameDetail = ({ pathId }) => {
 
     //data
     const { game, screens, isLoading } = useSelector((state) => state.details);
+    const toggle = useSelector(state => state.theme);
     let stars = getStars(game.rating);
     return (
         <>
             {!isLoading && (
                 <CardShadow className="shadow" onClick={exitDetailsHandler}>
-                    <Detail layoutId={pathId}>
-                        <Stats>
-                            <div className="rating">
-                                <motion.h3 layoutId={`name ${pathId}`}>{game.name}</motion.h3>
-                                <p>Rating: {game.rating}</p>
-                                {stars.map((star, i) => {
-                                    return <img type="image/svg+xml" src={star} style={{ display: "inline", width: "30px", height: "30px", margin: 0 }} key={i} alt={star} />
+                    <Detail>
+                        <motion.div layoutId={pathId} className={!toggle ? "toggle" : "no-toggle"}>
+                            <Stats>
+                                <div className="rating">
+                                    <motion.h3 className={!toggle ? "other_toggle" : ""} layoutId={`name ${pathId}`}>{game.name}</motion.h3>
+                                    <p className={!toggle ? "other_toggle" : ""}>Rating: {game.rating}</p>
+                                    {stars.map((star, i) => {
+                                        return <img type="image/svg+xml" src={star} style={{ display: "inline", width: "30px", height: "30px", margin: 0 }} key={i} alt={star} />
+                                    })}
+                                </div>
+                                <Info>
+                                    <h3 className={!toggle ? "other_toggle" : ""}>Platforms</h3>
+                                    <Platforms>
+                                        {game.platforms.map(data => {
+                                            //return <object type="image/svg+xml" data={getPlatfromIcon(data.platform.name)}>hjhjh</object>
+                                            //return <svg width="100" height="100" xmlns={xbox}></svg>
+                                            return <img type="image/svg+xml" src={getPlatfromIcon(data.platform.name)} style={{ width: "50px", height: "50px" }} key={data.platform.id} alt={data.platform.name} />
+                                        })}
+                                    </Platforms>
+                                </Info>
+                            </Stats>
+                            <Media>
+                                <motion.img layoutId={`image ${pathId}`} src={smallImage(game.background_image, 640)} alt="{background_image}" />
+                            </Media>
+                            <Description>
+                                <p style={{ textAlign: "justify" }} className={!toggle ? "other_toggle" : ""}>{game.description_raw}</p>
+                            </Description>
+                            <div className="gallery">
+                                {screens.results.map(screen => {
+                                    return <img key={screen.id} src={smallImage(screen.image, 640)} alt="game" />
                                 })}
                             </div>
-                            <Info>
-                                <h3>Platforms</h3>
-                                <Platforms>
-                                    {game.platforms.map(data => {
-                                        //return <object type="image/svg+xml" data={getPlatfromIcon(data.platform.name)}>hjhjh</object>
-                                        //return <svg width="100" height="100" xmlns={xbox}></svg>
-                                        return <img type="image/svg+xml" src={getPlatfromIcon(data.platform.name)} style={{ width: "50px", height: "50px" }} key={data.platform.id} alt={data.platform.name} />
-                                    })}
-                                </Platforms>
-                            </Info>
-                        </Stats>
-                        <Media>
-                            <motion.img layoutId={`image ${pathId}`} src={smallImage(game.background_image, 640)} alt="{background_image}" />
-                        </Media>
-                        <Description>
-                            <p>{game.description_raw}</p>
-                        </Description>
-                        <div className="gallery">
-                            {screens.results.map(screen => {
-                                return <img key={screen.id} src={smallImage(screen.image, 640)} alt="game" />
-                            })}
-                        </div>
+                        </motion.div>
                     </Detail>
                 </CardShadow>
             )}
@@ -108,7 +111,7 @@ const CardShadow = styled(motion.div)`
     width: 100%;
     min-height: 100vh;
     overflow-y:scroll;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.7);
     position: fixed;
     top: 0;
     left : 0;
@@ -125,18 +128,39 @@ const CardShadow = styled(motion.div)`
 `;
 
 const Detail = styled(motion.div)`
-    width: 80%;
-    border-radius: 1rem;
-    padding: 2rem 5rem;
-    background: white;
-    position: absolute;
-    left: 10%;
-    color: black;
-    //z-index: 10;
+    .no-toggle{
+        background: white;
+        color: black;
+        width: 80%;
+        border-radius: 1rem;
+        padding: 2rem 5rem;
+        position: absolute;
+        left: 10%;
+        //color: red;
+}
+
+.toggle{
+        width: 80%;
+        background: #181818;
+        //color: white;
+        border-radius: 1rem;
+        padding: 2rem 5rem;
+        position: absolute;
+        left: 10%;
+}
+    
     img{
         width: 100%;
+        //z-index: 10;
+        //display: block;
     }
-
+    
+    .other_toggle{
+        color: white;
+        opacity: 0.8;
+    }
+    
+    
 `;
 
 const Stats = styled(motion.div)`
