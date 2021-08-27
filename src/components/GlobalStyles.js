@@ -22,6 +22,14 @@ const GlobalStyles = createGlobalStyle`
     body{
         font-family: 'Montserrat', sans-serif;
         width: 100%;
+        //display: flex;
+        align-items: center;
+    }
+
+    @media only screen and (max-width: 650px){
+        body{
+            display: flex;
+        }
     }
 
     h2{

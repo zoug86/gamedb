@@ -5,11 +5,11 @@ import logo from '../img/logo.svg';
 import { fadeIn } from '../animation';
 
 //Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loadSearchedGames } from '../actions/gamesAction';
 
 const Nav = () => {
-    const { searched } = useSelector(state => state.games)
+    //const { searched } = useSelector(state => state.games)
 
     const dispatch = useDispatch();
     const [inputGame, setInputGame] = useState("");
@@ -50,22 +50,44 @@ const StyledNav = styled(motion.nav)`
             text-align: center;
             input {
                 width: 30%;
-            font-size: 1.5rem;
-            padding: 0.5rem;
-            border: none;
-            margin-top: 1rem;
-            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
-            //outline: none;
-            &:focus {outline: none; } 
+                font-size: 1.5rem;
+                padding: 0.5rem;
+                border: none;
+                margin-top: 1rem;
+                box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+                //outline: none;
+                &:focus {outline: none; } 
   }
             button {
-            font-size: 1.5rem;
-            border: none;
-            padding: 0.5rem 2rem;
-            cursor: pointer;
-            background: #ff7676;
-            color: white;
+                font-size: 1.5rem;
+                border: none;
+                padding: 0.5rem 2rem;
+                cursor: pointer;
+                background: #ff7676;
+                color: white;
   }
+  @media screen and (max-width: 1200px) {
+       input{
+           width: 50%;
+       }
+   }
+  @media screen and (max-width: 900px) {
+       input{
+           width: 70%;
+       }
+       button {
+            width: 30%;
+        }
+   }
+  @media screen and (max-width: 650px) {
+       input{
+           width: 100%;
+       }
+       button {
+            width: 100%;
+  }
+   }
+
 
             `;
 const Logo = styled(motion.nav)`
@@ -87,11 +109,11 @@ const Logo = styled(motion.nav)`
 const Form = styled(motion.form)`
             input::placeholder{
                 color: #ff7676;
-            font-size: 1.2rem;
-            opacity: 0.5;
-            padding: 1rem;
+                font-size: 1.2rem;
+                opacity: 0.5;
+                padding: 1rem;
    }
-
+   
             `;
 
 

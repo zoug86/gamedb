@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { GiNightSleep } from 'react-icons/gi'
+import { WiDaySunny } from 'react-icons/wi'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 
-import dark from '../img/darkTheme.svg';
-import light from '../img/lightTheme.svg';
 
 const ThemeSlider = () => {
   const dispatch = useDispatch();
@@ -27,12 +27,12 @@ const ThemeSlider = () => {
   return (
     <Slider>
       <div className={toggle ? "toggle" : ""}>
-        <img src={light} alt="lightTheme" />
+        <span className='day'><WiDaySunny /></span>
         <label className="switch">
           <input type="checkbox" onClick={sliderHandler} />
           <span className="slider round"></span>
         </label>
-        <img src={dark} alt="darkTheme" />
+        <span className='night'><GiNightSleep /></span>
       </div>
     </Slider >
   )
@@ -45,12 +45,18 @@ div{
  align-items: center;
  padding: 2rem;
 }
- 
- img{
-     width: 30px;
-     height: 30px;
-     margin: 0 0.5rem;
+ .night{
+  font-size: 2rem;
+  margin-left: 0.5rem;
+  
  }
+
+ .day{
+  color:#FFBE00;
+  font-size: 2.5rem;
+  margin-left: 0.5rem;
+ }
+
  .toggle{
    //background: red;
  }

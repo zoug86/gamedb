@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router';
-
+import Spinner from '../components/Spinner';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { loadGames } from '../actions/gamesAction';
@@ -24,6 +24,9 @@ const Home = () => {
     const location = useLocation();
     const pathId = location.pathname.split('/')[2];
     //console.log(pathId);
+    if (!popular.length || !newGames.length || !upComing.length) {
+        return <Spinner />
+    }
     return (
         <GameList variants={fadeIn} initial="hidden" animate="show">
             <AnimateSharedLayout type="crossfade">
